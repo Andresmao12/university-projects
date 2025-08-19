@@ -1,0 +1,178 @@
+﻿@page "/user/config/cuenta"
+@using LamaApp.Client.Pages.Usuario.User_Config.Layout_Config
+@using LamaApp.Client.Pages.Usuario.User_Config.Components
+
+@layout Layout
+
+<div class="row w-100 px-5 align-items-center justify-content-start gap-4 p-3 bg-light">
+
+    <div class="mt-4">
+        <h4>Informacion de la cuenta</h4>
+        <p>Manten actualizados tus datos</p>
+        <div class=" row align-items-center gap-3 my-3">
+            <img class="avatar-img col-2" src="Imagenes/Banner1.jpg"/>
+            <button class="col-3 h-auto btn btn-dark">Change Avatar</button>
+        </div>
+
+        <h4>Cuenta</h4>
+        <div class="row mb-3">
+            <div class="col">
+                <label for="usuario" class="form-label">Nombre de usuario</label>
+                <input type="text" class="form-control" id="usuario" placeholder="Usuario">
+            </div>
+            <div class="col">
+                <label for="capitulo" class="form-label">Capitulo</label>
+                <input type="password" class="form-control" id="capitulo" placeholder="Capitulo">
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col">
+                <label for="contrasena" class="form-label">Contraseña</label>
+                <input type="password" class="form-control" id="contrasena" placeholder="Contraseña">
+            </div>
+            <div class="col">
+                <label for="contrasena" class="form-label">Confirmar contraseña</label>
+                <input type="password" class="form-control" id="contrasena" placeholder="Contraseña">
+            </div>
+        </div>
+
+        <h4>Datos Personales</h4>
+        <form>
+            <div class="row mb-3">
+                <div class="col">
+                    <label for="nombres" class="form-label">Nombres</label>
+                    <input type="text" class="form-control" id="nombres" placeholder="Nombres">
+                </div>
+                <div class="col">
+                    <label for="apellidos" class="form-label">Apellidos</label>
+                    <input type="text" class="form-control" id="apellidos" placeholder="Apellidos">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col">
+                    <label for="identificacion" class="form-label">Identificacion</label>
+                    <input type="text" class="form-control" id="identificacion" placeholder="Número de Identificación">
+                </div>
+                <div class="col">
+                    <label for="tipo" class="form-label">Tipo de documento</label>
+                    <select class="form-select" id="tipo">
+                        <option selected>Seleccione</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row mb-3">
+            </div>
+            <div class="row mb-3">
+                <div class="col">
+                    <label for="fechaNacimiento" class="form-label">Fecha Nacimiento</label>
+                    <input type="date" class="form-control" id="fechaNacimiento">
+                </div>
+                <div class="col">
+                    <label for="lugar" class="form-label">Lugar</label>
+                    <input type="text" class="form-control" id="lugar" placeholder="Lugar de nacimiento">
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="direccionResidencia" class="form-label">Dirección Residencia</label>
+                <input type="text" class="form-control" id="direccionResidencia" placeholder="Dirección de residencia">
+            </div>
+
+            <div class="row mb-3">
+                <div class="col">
+                    <label for="telefonoResidencia" class="form-label">Teléfono Residencia</label>
+                    <input type="text" class="form-control" id="telefonoResidencia" placeholder="Teléfono de residencia">
+                </div>
+
+                <div class="col">
+                    <label for="celular" class="form-label">Celular</label>
+                    <input type="text" class="form-control" id="celular" placeholder="Número de celular">
+                </div>
+            </div>
+
+            <h4>Datos Familiares</h4>
+
+            <div class="row mb-3">
+                <div class="col">
+                    <label for="nombrePareja" class="form-label">Nombre de la Pareja</label>
+                    <input type="text" class="form-control" id="nombrePareja" placeholder="Nombre de la pareja">
+                </div>
+
+                <div class="col">
+                    <label for="identificacionPareja" class="form-label">Numero de identificación</label>
+                    <input type="text" class="form-control" id="identificacionPareja" placeholder="ID de la pareja">
+                </div>
+            </div>
+
+
+            <h4>Datos de Vehículo Actual</h4>
+            <div class="row mb-3">
+                <div class="col">
+                    <label for="marcaMoto" class="form-label">Marca de Moto</label>
+                    <input type="text" class="form-control" id="marcaMoto" placeholder="Marca de Moto">
+                </div>
+                <div class="col">
+                    <label for="modeloMoto" class="form-label">Modelo</label>
+                    <input type="text" class="form-control" id="modeloMoto" placeholder="Modelo">
+                </div>
+                <div class="col">
+                    <label for="anoMoto" class="form-label">Año</label>
+                    <input type="text" class="form-control" id="anoMoto" placeholder="Año">
+                </div>
+            </div>
+
+            <div class="row">
+                <button class="col-6 offset-3 btn btn-dark shadow-sm my-4">Guardar</button>
+            </div>
+
+
+        </form>
+    </div>
+
+</div>
+
+
+<style>
+    body {
+        background-color: #f0f2f5;
+    }
+
+    .avatar-img{
+        border-radius : 50%;
+    }
+
+    .settings-container {
+        max-width: 800px;
+        margin: 50px auto;
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-tabs .nav-link.active {
+        background-color: #f8f9fa;
+        border-color: #dee2e6 #dee2e6 #fff;
+    }
+
+    .form-control {
+        margin-bottom: 20px;
+    }
+
+    .change-avatar {
+        
+        margin-bottom: 20px;
+    }
+
+        .change-avatar i {
+            font-size: 50px;
+            margin-right: 20px;
+        }
+</style>
+
+
+
+
+@code {
+
+}

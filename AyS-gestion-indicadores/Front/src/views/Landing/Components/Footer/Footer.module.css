@@ -1,0 +1,31 @@
+.container {
+    background: #222;
+    color: #fff;
+    text-align: center;
+    padding: 15px 0;
+    position: relative;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+
+}
+
+.container nav {
+    display: flex;
+    gap: 15px;
+}
+
+.container nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+
+    &:hover {
+        color: var(--tertiary-color);
+    }
+
+}

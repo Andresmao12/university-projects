@@ -1,0 +1,43 @@
+﻿@using System.Text.Json;
+@using LamaApp.Client.Pages.Home.Components.Components
+@using LamaApp.Client.Services.Capitulos
+@using LamaApp.Shared
+
+@inject HttpClient httpClient
+@inject ICapituloService capituloService
+
+<div class="vh-100 d-flex justify-content-center align-items-center flex-column gap-xxl-5 m-0 mb-4" id="Episodes">
+    <h2 class="text-center fs-1 fw-bold">Capitulos</h2>
+    <div class="grid-cont w-100 px-5 gap-5 h-100 ">
+
+        @foreach (var cap in capitulos)
+        {
+              <Target Capitulo="@cap.Nombre" Ciudad="@cap.Ciudad" />
+        }
+    </div>
+</div>
+
+<style>
+    .grid-cont{
+        display : grid;
+        grid-template-columns : repeat(3, 1fr);
+        grid-auto-rows : auto
+    }
+</style>
+
+@code {
+    private List<CapituloSh> capitulos = new List<CapituloSh>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            capitulos = await capituloService.GetCapitulos();
+            string jsonCapitulos = JsonSerializer.Serialize(capitulos, new JsonSerializerOptions { WriteIndented = true });
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error al obtener capítulos: {ex.Message}");
+        }
+    }
+}

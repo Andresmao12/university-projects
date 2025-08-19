@@ -1,0 +1,84 @@
+.container {
+    height: 100vh;
+
+    position: relative;
+
+    display: flex;
+    align-items: center;
+}
+
+.container_textCont {
+    max-width: 50%;
+    padding-left: 80px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    z-index: 5;
+
+    & h1 {
+        font-size: 50px;
+    }
+}
+
+.btnLogin {
+
+    width: 50%;
+    padding: 10px 20px;
+    border-radius: 7px;
+
+    background-color: var(--secondary-color);
+    color: var(--button-text-color);
+
+    font-weight: 500;
+    letter-spacing: 1px;
+
+    transition: 500ms;
+
+    &:hover {
+        background-color: var(--tertiary-color);
+    }
+
+    & span {
+        display: inline-block;
+        transition: 200ms;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    &:hover span {
+        transform: scale(1.4);
+    }
+}
+
+.container img {
+    height: 100%;
+    max-width: 80%;
+    object-fit: cover;
+
+
+    position: absolute;
+    right: 0;
+
+    filter: blur(10px);
+    -webkit-mask-image: linear-gradient(to left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+    mask-image: linear-gradient(to left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+
+    animation: initialBlur linear both;
+    animation-timeline: scroll(root);
+    animation-range: 0 4em;
+
+}
+
+
+@keyframes initialBlur {
+    to {
+        filter: blur(0);
+    }
+
+
+}

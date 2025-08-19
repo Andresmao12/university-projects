@@ -1,0 +1,204 @@
+﻿@page "/admin/episodes"
+@using System.Text.Json;
+@using Microsoft.AspNetCore.Components.Forms;
+@using LamaApp.Client.Pages.Admin.Layout
+@using LamaApp.Shared
+@using LamaApp.Client.Services.Admin
+@using LamaApp.Client.Services.Capitulos
+@using LamaApp.Client.Services.Usuario;
+@layout AdminLayout
+
+@inject HttpClient httpClient
+@inject ICapituloService capituloService
+@inject IAdminService adminService
+
+
+<div class="flex-grow-1 p-4">
+    <h2 class="h2 mb-4">Gestión de Capítulos</h2>
+
+    <div class="d-flex justify-content-between mb-4">
+        <div class="w-25">
+            <input type="text" class="form-control" placeholder="Buscar capítulo...">
+        </div>
+        <button class="btn btn-primary" @onclick="() => OpenEventModal(1, null)">
+            <i class="bi bi-plus-circle me-2"></i> Agregar Capítulo
+        </button>
+    </div>
+
+    @* tabla de capitulos *@
+     <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Pais</th>
+                <th>Ciudad</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var capitulo in capitulos)
+            {
+                <tr>
+                    <td>@capitulo.IdCapitulo</td>
+                    <td>@capitulo.Nombre</td>
+                    <td>@capitulo.Pais</td>
+                    <td>@capitulo.Ciudad</td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-secondary me-2" @onclick="() => OpenEventModal(2, capitulo)">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-danger" @onclick="() => DeleteCap(capitulo.IdCapitulo)">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@if (showEventModal)
+{
+    <div class="modal fade show" style="display: block;" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+
+            <EditForm  FormName="modalForm" Model="currentCap" OnValidSubmit="handleModalSubmit">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">@(currentEvent == 1 ? "Agregar Capítulo" : "Editar Capítulo")</h5>
+                        <button type="button" class="btn-close" @onclick="CloseEventModal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="capNombre" class="form-label">Nombre</label>
+                            <InputText class="form-control" id="capNombre" @bind-Value="currentCap.Nombre" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="capDesc" class="form-label">Descripcion</label>
+                            <InputText class="form-control" id="capDesc" @bind-Value="currentCap.Descripcion" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="capPais" class="form-label">Pais</label>
+                            <InputText class="form-control" id="capPais" @bind-Value="currentCap.Pais" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="capCiudad" class="form-label">Ciudad</label>
+                            <InputText class="form-control" id="capCiudad" @bind-Value="currentCap.Ciudad" />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" @onclick="CloseEventModal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </div>
+            </EditForm>
+
+        </div>
+    </div>
+    <div class="modal-backdrop fade show"></div>
+}
+
+
+
+@code {
+
+    private List<CapituloSh> capitulos = new List<CapituloSh>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            capitulos = await capituloService.GetCapitulos();
+            string jsonCapitulos = JsonSerializer.Serialize(capitulos, new JsonSerializerOptions { WriteIndented = true });
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error al obtener capítulos: {ex.Message}");
+        }
+    }
+
+    private bool showEventModal = false;
+
+    // Intente hacerlo con string pero daba error, entonces, 1 = add ; 2 = edit
+    private int currentEvent = 0;
+
+    [SupplyParameterFromForm(FormName = "modalForm")]
+    public CapituloSh currentCap { get; set; } = new CapituloSh();
+
+
+
+    private void OpenEventModal(int currentEvent, CapituloSh? cap)
+    {
+        showEventModal = true;
+        this.currentEvent = currentEvent;
+
+        if(currentEvent == 1)
+        {
+            currentCap = new CapituloSh();
+        }
+        else
+        {
+            currentCap = cap;
+        }
+
+    }
+
+    private async Task handleModalSubmit()
+    {
+        if (currentEvent == 1)
+        {
+            try
+            {
+                await capituloService.AddCapitulo(currentCap);
+                capitulos = await capituloService.GetCapitulos();
+                CloseEventModal();
+
+            }catch(Exception ex)
+            {
+                Console.WriteLine("Error en Admin_episodes: " + ex); // Mostrar modal o alert de error
+            }
+
+        }else if(currentEvent == 2)
+        {
+            try
+            {
+                await capituloService.UpdateCapitulo(currentCap);
+                CloseEventModal();
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+        }
+    }
+
+    private void CloseEventModal()
+    {
+        showEventModal = false;
+        currentCap = new CapituloSh();
+    }
+
+    private void guardarCap()
+    {
+
+    }
+
+    private async Task DeleteCap(int id)
+    {
+
+        //Se podria preguntar si esta seguro de eliminar
+
+        //Eliminamos el capitulo
+        var deleteCap = await capituloService.deleteCapitulo(id);
+        
+        if (deleteCap.statusCode == 200)
+        {
+            capitulos.RemoveAll(e => e.IdCapitulo == id);
+            // Mostrar confirmacion
+        }
+
+    }
+
+}

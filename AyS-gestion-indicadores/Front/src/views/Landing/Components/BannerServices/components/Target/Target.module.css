@@ -1,0 +1,29 @@
+.targetCont {
+    width: 290px;
+    padding: 1em;
+
+    background-color: #2c2c2c;
+    border: 1px solid var(--aux-first-color);
+    border-radius: 8px;
+    box-shadow: 0 0 40px -30px var(--aux-first-color);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+
+    transition: 200ms;
+
+    &:hover {
+        color: var(--aux-first-color);
+        background-color: var(--primary-color);
+        box-shadow: 0 0 60px -30px var(--aux-first-color);
+        transform: scale(1.2) rotate(10deg) translate(29px, -30px) skew(-5deg, 0deg);
+    }
+}
+
+.targetCont .icon {
+    width: 100%;
+    min-height: 30%;
+}

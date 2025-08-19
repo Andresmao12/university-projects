@@ -1,0 +1,21 @@
+﻿/*@keyframes imageSlide {
+    from{
+        width : 50%;
+    }
+    to {
+        width : 100%;
+    }
+
+}
+
+
+.banner-image {
+    view-timeline-name: --image;
+    view-timeline-axix: block;
+    
+    animation-timeline : --image;
+    animation-name : imageSlide;
+
+    animation-range : entry 25% cover 30%;
+    animation-fill-mode : both;
+}*/

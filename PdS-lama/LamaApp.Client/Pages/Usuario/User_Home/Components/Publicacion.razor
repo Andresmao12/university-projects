@@ -1,0 +1,55 @@
+﻿@using LamaApp.Shared
+@using LamaApp.Client.Services.Publicacion
+@using LamaApp.Client.Services.Usuario
+
+@inject IPublicacionService publicacionService
+@inject IUsuarioService usuarioService
+
+
+<div class="container p-2 m-0 border">
+
+    <div class="inf-usuario d-flex flex-row p-2 gap-3">
+        <img src="Imagenes/notFound.png" alt="Alternate Text" class="user-img col-1 " />
+        <span class="col d-flex align-items-center">@nombreUsuario</span>
+    </div>
+@*     El mismo componente para varios tipos de contenido dentro del div
+ *@    <div class="row p-3">
+        <p class="m-0">@PublicacionData.Contenido</p>
+    </div>
+    <div class="row justify-content-end px-4">
+        <button class="col-auto btn btn-outline-dark mx-1">Like <i class="fa-regular fa-thumbs-up"></i></button>
+        <button class="col-auto btn btn-outline-dark mx-1">Comment <i class="fa-regular fa-comment"></i></button>
+    </div>
+
+</div>
+
+<style>
+    .user-img{
+        border-radius : 50%;
+        max-width : 50px;
+    }
+</style>
+
+@code {
+    [Parameter]
+    public PublicacionSh PublicacionData { get; set; }
+
+    private string nombreUsuario;
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            Console.WriteLine("IdUsuarip: " + PublicacionData.IdUsuario);
+            var usuario = await usuarioService.GetUsuarioById(PublicacionData.IdUsuario);
+            Console.WriteLine("Respuesta de usuario: " + usuario);
+            nombreUsuario = usuario?.Nombre ?? "Usuario Desconocido"; // En caso de que no se encuentra el usuario
+
+        }catch (Exception e)
+        {
+            Console.WriteLine("OCurrio un error obteniendo el usuario en publicacion: " + e);
+        }
+    }
+
+}

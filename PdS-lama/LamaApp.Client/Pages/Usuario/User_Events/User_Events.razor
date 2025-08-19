@@ -1,0 +1,119 @@
+﻿@page "/user/events"
+@using LamaApp.Client.Pages.Usuario.Layout
+@using LamaApp.Client.Pages.Usuario.User_Events.Components
+@using LamaApp.Shared
+@using LamaApp.Client.Services.Evento
+
+@inject IEventoService eventoService
+
+@layout UserLayout
+
+<div class="container p-2 m-0 border d-flex flex-column gap-2">
+    <div class="row p-2 justify-content-between">
+        <h2 class="col-auto fw-bold">Eventos</h2>
+        <button class="col-auto btn btn-outline-dark mx-2"><i class="fa-solid fa-filter"></i></button>
+    </div>
+
+    <div class="caps-container d-grid grid-cols-3">
+        @foreach (var evento in ListaEventos)
+        {
+            <Target Titulo="@evento.Titulo" Descripcion="@evento.Descripcion" Ubicacion="@evento.Ubicacion" Fecha="@evento.FechaInicio.ToString("dd/MM/yyyy")" OnCardClick="() => OpenEventModal(evento)"/> <!-- Añadir el evento para abrir el modal -->
+        }
+    </div>
+</div>
+
+
+@if (showEventModal)
+{
+    <div class="modal fade show align-content-center" style="display: block;" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document" style="max-width: 60%; width: 40%; height: 70%;">
+            <div class="modal-content h-100 backgroundImg">
+                <div class="overlay"></div>
+                <div class="modal-body text-white d-flex flex-column justify-content-between h-100">
+                    <div class="mb-3">
+                        <h1 class="text-white">@currentEvent.Titulo</h1>
+                        <p class="h-auto m-0">@currentEvent.Ubicacion  @currentEvent.FechaInicio.ToString("dd/MM/yyyy")</p>
+                    </div>
+
+                    <p>@currentEvent.Descripcion</p>
+
+                    <div class="d-flex justify-content-end gap-4 mt-auto">
+                        <button type="button" class="btn btn-secondary px-4" @onclick="CloseEventModal">Cerrar</button>
+                        <button type="button" class="btn btn-primary px-4" @onclick="SaveEvent">Inscribirme!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-backdrop fade show"></div>
+}
+
+
+<style>
+    .caps-container {
+        grid-gap: 1.5em;
+        grid-template-rows: 400px;
+        grid-auto-rows: 400px;
+    }
+
+    .backgroundImg {
+        background-image: url("Imagenes/Banner1.jpg");
+        background-size: cover;
+        background-position: center;
+    }
+
+    .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.6);
+        z-index: 0;
+    }
+
+    .modal-body {
+        z-index: 1;
+    }
+
+    .modal-title {
+        z-index: 1;
+        font-size: 1.5rem;
+    }
+</style>
+
+
+@code {
+    private List<EventoSh> ListaEventos = new List<EventoSh>();
+    private bool showEventModal = false;
+    private EventoSh currentEvent = new EventoSh();
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            ListaEventos = await eventoService.GetEventos();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Error en la respuesta: " + e);
+        }
+    }
+
+    private void OpenEventModal(EventoSh evento)
+    {
+        currentEvent = evento;
+        showEventModal = true;
+    }
+
+    private void CloseEventModal()
+    {
+        showEventModal = false;
+    }
+
+    private async Task SaveEvent()
+    {
+        // Aquí puedes manejar la lógica de guardar cambios o cualquier acción relacionada
+        CloseEventModal();
+    }
+}

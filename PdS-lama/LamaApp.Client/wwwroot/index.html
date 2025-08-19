@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LamaApp.Client</title>
+    <base href="/" />
+    <link rel="stylesheet" href="css/app.css" />
+    <link rel="stylesheet" href="bootstrap/bootstrap.min.css" />
+    <script src="https://kit.fontawesome.com/07a254f7db.js" crossorigin="anonymous"></script>
+    <!-- If you add any scoped CSS files, uncomment the following to load them
+    <link href="LamaApp.Client.styles.css" rel="stylesheet" /> -->
+</head>
+
+<body>
+    <div id="app" class="min-vh-100">
+        <svg class="loading-progress">
+            <circle r="40%" cx="50%" cy="50%" />
+            <circle r="40%" cx="50%" cy="50%" />
+        </svg>
+        <div class="loading-progress-text"></div>
+    </div>
+
+    <div id="blazor-error-ui">
+        An unhandled error has occurred.
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+
+        window.Graficar = async (chartId, data, labels, labelName) => {
+
+            const ctx = document.getElementById(chartId).getContext("2d");
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: data,
+                        backgroundColor: "rgba(75, 192, 192, 0.2)",
+                        borderColor: "rgba(75, 192, 192, 1)",
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    plugins: {
+                        legend: {
+                            display: false // Esto oculta la leyenda y elimina el "undefined"
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        };
+
+    </script>
+
+
+    <script src="_framework/blazor.webassembly.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,24 @@
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.data-table th,
+.data-table td {
+    padding: 12px;
+    text-align: left;
+    /* border-bottom: 1px solid white; */
+    background-color: var(--background-component);
+    color:#fff;
+}
+
+.data-table th {
+    background-color: var(--secondary-color);
+    color: white;
+    font-weight: 600;
+}
+
+.data-table tr:hover {
+    border-bottom: 1px solid var(--aux-first-color);
+}

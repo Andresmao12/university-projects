@@ -1,0 +1,100 @@
+﻿@using LamaApp.Client.Pages.Home.Components.Components
+@using LamaApp.Client.Services.Evento
+@using LamaApp.Shared
+
+@inject IEventoService EventoService
+
+<div class="vh-100 d-flex justify-content-start align-items-center flex-column gap-xxl-5 position-relative" id="Episodes">
+    <h2 class="text-center fs-1 fw-bold">Eventos principales</h2>
+    <div class="sliderCont d-flex flex-row position-relative w-100 h-100 px-5 py-1">
+
+        @if (eventos != null && eventos.Count > 0)
+        {
+            for (int i = 0; i < Math.Min(3, eventos.Count); i++)
+            {
+                <div class="slider_img img@(i + 1)"><h1>@eventos[i].Titulo</h1></div>
+            }
+        }
+        else
+        {
+            <p>Cargando eventos...</p>
+        }
+
+    </div>
+</div>
+
+<style>
+
+    #Episodes {
+        margin: 7em 0 0;
+    }
+
+    .img1 {
+        background-image: url("/Imagenes/Banner1.jpg");
+    }
+
+
+    .img2 {
+        background-image: url("/Imagenes/Banner1.jpg");
+    }
+
+
+    .img3 {
+        background-image: url("/Imagenes/Banner1.jpg");
+    }
+
+    .slider_img h1 {
+        position: absolute;
+        bottom: 1em;
+        left: 1em;
+        color: #fff;
+        z-index: 20;
+    }
+
+    .sliderCont {
+        justify-content: center;
+        overflow: hidden;
+    }
+
+    .slider_img {
+        height: 100%;
+        flex-grow: .5;
+        background-position: center;
+        background-size: cover;
+        position: relative;
+    }
+
+        .slider_img:after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: #000a;
+        }
+
+        .slider_img:hover {
+            flex-grow: 1;
+            transition: 400ms;
+        }
+
+
+            .slider_img:hover > h1 {
+                transform: scale(1.2);
+                transition: 400ms;
+            }
+
+            .slider_img:hover:after {
+                background-color: #0000;
+                transition: 400ms;
+            }
+
+</style>
+
+@code {
+    private List<EventoSh> eventos;
+
+    protected override async Task OnInitializedAsync()
+    {
+        eventos = await EventoService.GetEventos();
+    }
+}

@@ -1,0 +1,41 @@
+﻿<div class="target-cont position-relative">
+    <img src="Imagenes/montaña.jpg" class="position-absolute top-0 z-0 imagen-gap image-cover rounded-3"/>
+    <div class="overlay position-absolute top-0 left-0 right-0 bottom-0 z-0 rounded-3"></div>
+
+    <div class="z-1 d-flex position-relative flex-column w-full h-full justify-content-end text-white p-2">
+        <h2>@Capitulo</h2>
+        <span>Epsiodio @Ciudad</span>
+    </div>
+
+</div>
+
+<style>
+
+    .target-cont{
+        cursor : pointer;
+    }
+
+    .target-cont:hover{
+            transform: scale(1.04);
+            transition : 200ms;
+    }
+
+    .overlay {
+        background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro con opacidad */
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 0;
+    }
+
+</style>
+
+@code {
+    [Parameter]
+    public string Capitulo { get; set; } = "...";
+
+    [Parameter]
+    public string Ciudad { get; set; } = "...";
+}

@@ -1,0 +1,16 @@
+{
+    "navigationFallback": {
+        "rewrite": "/index.html",
+        "exclude": [
+            "/images/*.{png,jpg,gif}",
+            "/static/*"
+        ]
+    },
+    "routes": [
+        {
+            "route": "/*",
+            "serve": "/index.html",
+            "statusCode": 200
+        }
+    ]
+}

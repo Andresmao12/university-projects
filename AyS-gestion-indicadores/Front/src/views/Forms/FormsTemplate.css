@@ -1,0 +1,36 @@
+/* Contenedor principal */
+.app {
+  display: flex; /* Usa Flexbox */
+  height: 100vh; /* Ocupa toda la altura de la pantalla */
+}
+
+/* Sidebar (ya debería tener sus propios estilos) */
+.sidebar {
+  width: 250px; /* Ancho fijo para el sidebar */
+  background-color: #333; /* Color de fondo del sidebar */
+  color: white;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Contenedor del contenido dinámico */
+.content {
+  flex-grow: 1; /* Ocupa el espacio restante */
+  padding: 20px;
+  background-color: #333;
+  color: #fff !important  ;
+  overflow-y: auto; /* Permite el desplazamiento vertical si es necesario */
+}
+
+/* Estilos para el AddButton */
+.add-button {
+  margin-bottom: 20px; /* Espacio entre el botón y el formulario */
+}
+
+.flex-row-end {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 20px;
+}

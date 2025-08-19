@@ -1,0 +1,44 @@
+:root {
+
+    /* Colores principales */
+    --primary-color: #2E073F;
+    --secondary-color: #7A1CAC;
+    --tertiary-color: #AD49E1;
+    --aux-first-color: #EBD3F8;
+
+    /* Fondos */
+    --background-color: #333;
+    --background-component:#222;
+    --aux-background-color: #ccc;
+
+    /* Textos */
+    --text-color: #FFF;
+    --aux-text-color: #000;
+    --disable-text-color: #666666;
+    --link-color: #1E88E5;
+
+    --font-family: system-ui, 'Segoe UI', sans-serif;
+
+    /* Estados */
+    --success-color: #4CAF50;
+    --error-color: #F44336;
+    --warning-color: #FFC107;
+    --info-color: #2196F3;
+
+    --success-color-hv: #078e0b;
+    --error-color-hv: #a51106;
+    --warning-color-hv: #c69504;
+    --info-color-hv: #0072cf;
+
+
+    /* Botones y formularios */
+    --input-background-color: #333;
+    --input-text-color: #000000;
+
+    --button-text-color: #FFFFFF;
+
+    /* Bordes y radios */
+    --border-radius-small: 4px;
+    --border-radius-large: 8px;
+
+}

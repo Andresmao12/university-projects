@@ -1,0 +1,47 @@
+﻿@page "/user/account/inf"
+@using LamaApp.Client.Pages.Usuario.User_Account.Layout_Account
+@using LamaApp.Client.Pages.Usuario.User_Home.Components
+@using LamaApp.Client.Pages.Usuario.User_Account.Components
+@layout Layout
+
+<div class="row h-auto w-100 mt-1 align-items-center justify-content-start gap-4 p-3 bg-light">
+    <Nav />
+
+    <div class="card d-flex flex-column gap-4 p-4">
+        <h3 class="fw-bold">Informacion de usuario</h3>
+        <div>
+            <h5 class="fw-bold">Acerca de mi</h5>
+            <p>Motociclista </p>
+        </div>
+        <div>
+            <p class = "fw-bold">Bike</p>
+            <p>2022 MT - 09</p>
+            <p class = "fw-bold">Rodadas favoritas</p>
+            <p>Carretera largas distancias</p>
+        </div>
+       <div>
+            <p class="fw-bold">Miembro desde</p>
+            <p>Enero 2018</p>
+            <p class="fw-bold">Achievements</p>
+            <ul>
+                <li>Logro</li>
+                <li>Logro</li>
+                <li>Logro</li>
+            </ul>
+       </div>
+       
+    </div>
+
+</div>
+
+<style>
+    p{
+        padding : 0;
+        margin : 0;
+    }
+</style>
+
+
+@code {
+
+}

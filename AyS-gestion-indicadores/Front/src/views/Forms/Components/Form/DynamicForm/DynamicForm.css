@@ -1,0 +1,97 @@
+.dynamic-form-container {
+  margin-top: 20px;
+}
+
+.dynamic-form {
+  background-color: var(--background-component);
+  color: var(--text-color);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-color); 
+  margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  color: var(--text-color);
+  border-radius: 4px;
+  background-color: var(--input-background-color);
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: var(--secondary-color);
+  outline: none;
+  box-shadow: 0 0 30px -20px var(--aux-first-color);
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.submit-button,
+.cancel-button {
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-button {
+  background-color: var(--info-color);
+  color: white;
+}
+
+.submit-button:hover {
+  background-color: var(--info-color-hv);
+}
+
+.cancel-button {
+  background-color: var(--error-color);
+  color: white;
+}
+
+.cancel-button:hover {
+  background-color: var(--error-color-hv);
+}
+
+.consultar-button {
+  background-color: var(--info-color);
+  color: white;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.consultar-button:hover {
+  background-color: var(--info-color-hv);
+}
+
+.consultar-button:active {
+  background-color: var(--info-color);
+}

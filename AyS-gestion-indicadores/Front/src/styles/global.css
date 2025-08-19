@@ -1,0 +1,35 @@
+/* Importamos variables para usar en todo el proyecto */
+@import url("./variables.css");
+
+#root {
+    all: unset;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+
+    background-color: var(--background-component);
+    /* Temporal?? */
+    color: var(--text-color);
+}
+
+button,
+input[type=button] {
+    cursor: pointer;
+}
+
+button,
+input {
+    border: none;
+    outline: none;
+}

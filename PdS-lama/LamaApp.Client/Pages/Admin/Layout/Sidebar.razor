@@ -1,0 +1,74 @@
+﻿@inject NavigationManager Navigation
+@inject IJSRuntime js
+
+
+<div class="sidebar col">
+    <div class="sidebar-header">
+        <h1 class="fw-bold fs-2">LAMA</h1>
+        <p class="fs-6 text-secondary">@userName</p>
+    </div>
+    <ul class="sidebar-options">
+        <li role="button"><a href="/admin/stats"><i class="fa-solid fa-chart-simple mx-3"></i>Inicio</a></li>
+        <li role="button"><a href="/admin/episodes"<i class="fa-solid fa-location-dot mx-3"></i>Capitulos</a></li>
+        <li role="button"><a href="/admin/events"><i class="fa-regular fa-calendar mx-3"></i>Eventos</a></li>
+        <li class="border-bottom my-4"></li>
+        <li role="button"><a href="/admin/stats"><i class="fa-regular fa-flag mx-3"></i>Reportes</a></li>
+        <li role="button" @onclick="HandleBtnSalir"><a<i class="fa-solid fa-right-from-bracket mx-3"></i>Salir</a></li>
+    </ul>
+
+
+    @*
+    <button class="btn btn-primary mb-3 w-75 align-self-center" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="window.location.href = '/user'">
+    Acceso al inicio
+    </button>
+
+    <button class="btn btn-primary w-75 align-self-center" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="window.location.href = '/admin/stats'">
+    Acceso al admin
+    </button>
+    *@
+
+</div>
+
+<style>
+    .sidebar {
+        background-color: #112;
+        color: #fff;
+    }
+
+    .sidebar-options li :is(a, i) {
+        text-decoration: none;
+        color: #fff;
+    }
+
+    .sidebar-options li:hover :is(a, i) {
+        text-decoration: none;
+        color: #000;
+    }
+</style>
+
+
+<script>
+    window.clearUsernameFromLocalStorage = () => {
+        localStorage.removeItem('nombreUsuario');
+    };
+</script>
+
+
+@code {
+    private string userName;
+
+    protected override async Task OnInitializedAsync()
+    {
+        userName = await js.InvokeAsync<string>("localStorage.getItem", "nombreUsuario") ?? "Anonimo";
+    }
+
+
+    private async Task HandleBtnSalir()
+    {
+        // Llamamos a la función JavaScript para limpiar el localStorage
+        await js.InvokeVoidAsync("clearUsernameFromLocalStorage");
+
+        // Redirigimos a la página principal
+        Navigation.NavigateTo("/", forceLoad: true);
+    }
+}

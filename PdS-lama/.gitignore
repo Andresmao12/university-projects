@@ -1,0 +1,27 @@
+# Ignorar la carpeta .vs
+.vs/
+
+# Ignorar carpetas de compilación de la aplicación cliente y el servidor
+**/bin/
+**/obj/
+
+# Ignorar archivos de configuración de usuario de Visual Studio
+*.suo
+*.user
+*.userprefs
+*.vspscc
+*.cache
+
+# Ignorar archivos temporales de Visual Studio
+*.pdb
+*.ilk
+*.log
+
+# Ignorar carpetas de salida de las soluciones
+**/Debug/
+**/Release/
+
+# Ignorar archivos de configuración de Docker (si aplica)
+.dockerignore
+Dockerfile
+docker-compose.yml

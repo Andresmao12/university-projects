@@ -1,0 +1,55 @@
+﻿<div class="options-cont text-center row w-100 justify-content-center align-items-center gap-5 m-0 p-1 my-3">
+    <NavLink href = "/user/account/public" class="option w-auto flex-grow-1">Publicaciones</NavLink>
+    <NavLink href="/user/account/destacado" class="option w-auto flex-grow-1">Destacado</NavLink>
+    <NavLink href="/user/account/inf" class="option w-auto flex-grow-1">Informacion</NavLink>
+</div>
+
+<style>
+
+/*     .options-cont{
+        background-color : #112;
+    } */
+
+    .option{
+        text-decoration : none;
+        padding: 4px 8px;
+        color : #888;
+        cursor : pointer;
+    }
+
+    .option:hover{
+        color : #888
+    }
+   
+    .selected{
+        background-color : #112;
+        box-shadow : 0 0 5px -1px #112;
+        border-radius : 5px;
+        color : #fff;
+        transition : 100ms;
+    }
+
+    .selected:hover{
+        color : #000;
+    }
+
+</style>
+
+<script>
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const url = window.location.pathname;
+        const cont = document.querySelector(".options-cont");
+
+        cont.querySelectorAll(".option").forEach((element) => {
+            if (url.includes(element.getAttribute("href"))) {
+                element.classList.add("selected");
+            }
+        });
+    });
+
+</script>
+
+@code {
+
+}

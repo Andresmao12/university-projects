@@ -1,0 +1,146 @@
+﻿@page "/user/episodes"
+@using LamaApp.Client.Pages.Layout
+@using LamaApp.Client.Pages.Usuario.Layout
+@using LamaApp.Shared
+@using LamaApp.Client.Services.Capitulos
+@inject ICapituloService capituloService
+@layout UserLayout
+
+<div class="container m-0 p-4 d-flex flex-column gap-4 w-100">
+    <h1 class="fs-1 fw-bold text-center">Episodios en motocicleta</h1>
+
+    <div class="grid-cont d-grid grid-cols-3 gap-5 w-100">
+        @foreach (var cap in listaEpisodios)
+        {
+            <div class="target bg-white p-3 rounded d-flex flex-column gap-2 justify-content-between">
+                <p class="fs-1 fw-bold">
+                    @cap.Nombre
+                </p>
+                <img src="Imagenes/montaña.jpg" class="w-100 rounded-3" />
+                <div class="desc">
+                    <p class="fs-6 text-secondary">@cap.Pais - @cap.Ciudad</p>
+                    <p>@cap.Descripcion</p>
+                </div>
+
+                <button class="btn btn-dark" @onclick="() => OpenEventModal(cap)">Ver más detalles</button>
+            </div>
+        }
+    </div>
+</div>
+
+@if (showEventModal)
+{
+    <div class="modal fade show align-content-center" style="display: block;" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document" style="max-width: 60%; width: 60%; height: 70%;">
+            <div class="modal-content h-100 backgroundImg">
+                <div class="overlay"></div>
+                <div class="modal-body text-white d-flex flex-column justify-content-between h-100">
+                    <div class="mb-3">
+                        <h1 class=" text-white ">@currentEvent.Nombre</h1>
+                        <p class="h-auto m-0">@currentEvent.Ciudad - @currentEvent.Pais</p>
+
+                    </div>
+
+                    <p> @currentEvent.Descripcion</p>
+
+                    <div class="d-flex justify-content-end gap-4 mt-auto">
+                        <button type="button" class="btn btn-secondary px-4" @onclick="CloseEventModal">Cerrar</button>
+                        <button type="button" class="btn btn-primary px-4" @onclick="SaveEvent">Vamos!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-backdrop fade show"></div>
+}
+
+
+
+
+<style>
+    .grid-cont {
+        grid-template-rows: auto;
+        grid-auto-rows: auto;
+    }
+
+    .backgroundImg{
+        background-image: url("Imagenes/montaña.jpg");
+        background-size: cover;
+        background-position: center;
+    }
+
+    .modal-header {
+        position: relative;
+        padding: 0;
+    }
+
+    .modal-background-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+    }
+
+    .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.4); 
+        z-index: 0;
+    }
+
+    .modal-body,
+    .modal-footer {
+        z-index: 1;
+    }
+
+    .modal-title {
+        z-index: 1;
+        font-size: 1.5rem;
+    }
+
+    .btn-close {
+        z-index: 2;
+    }
+
+</style>
+
+@code {
+    private List<CapituloSh> listaEpisodios = new List<CapituloSh>();
+    private bool showEventModal = false;
+    private CapituloSh currentEvent = new CapituloSh();
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            listaEpisodios = await capituloService.GetCapitulos();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Error en la respuesta: " + e);
+        }
+    }
+
+    private void OpenEventModal(CapituloSh capitulo)
+    {
+        currentEvent = capitulo;
+        showEventModal = true;
+    }
+
+    private void CloseEventModal()
+    {
+        showEventModal = false;
+    }
+
+    private async Task SaveEvent()
+    {
+        // Aquí puedes manejar la lógica de guardar cambios o cualquier acción relacionada
+        CloseEventModal();
+    }
+}

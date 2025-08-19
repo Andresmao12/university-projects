@@ -1,0 +1,73 @@
+﻿@page "/user"
+@using LamaApp.Shared
+@using LamaApp.Client.Pages.Usuario.Layout
+@using LamaApp.Client.Pages.Usuario.User_Home.Components
+@using LamaApp.Client.Services.Publicacion;
+
+@inject IPublicacionService publicacionService
+@layout UserLayout
+
+<div class="container m-0 w-75 shadow-sm d-flex flex-column gap-2 pt-2">
+    <PostInput OnPublicacionCreada="HandleNewPublicacion" />
+
+    @if (isLoading)
+    {
+        @* Verificar si se ve *@
+        <p class="align-self-center">Cargando publicaciones...</p>
+    }
+    else if (hasError)
+    {
+        <p class="align-self-center">Ocurrio un error cargando las publicaciones</p>
+    }
+    else
+    {
+        foreach (var publicacion in publicaciones)
+        {
+            <Publicacion PublicacionData="publicacion" />
+        }
+    }
+</div>
+
+@code {
+    private List<PublicacionSh> publicaciones = new List<PublicacionSh>();
+    private bool isLoading = true;
+    private bool hasError = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            isLoading = true;
+            hasError = false;
+
+            publicaciones = await publicacionService.obtenerPublicaciones();
+        }
+        catch (Exception)
+        {
+            hasError = true;
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private async Task HandleNewPublicacion(PublicacionSh nuevaPublicacion)
+    {
+        try
+        {
+            isLoading = true;
+            hasError = false;
+            publicaciones = await publicacionService.obtenerPublicaciones();
+        }
+        catch (Exception)
+        {
+            hasError = true;
+        }
+        finally
+        {
+            isLoading = false;
+        }
+        StateHasChanged(); 
+    }
+}

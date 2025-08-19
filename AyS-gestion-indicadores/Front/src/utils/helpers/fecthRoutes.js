@@ -1,0 +1,1 @@
+export const fetchRoute = 'https://csharpapiapi2.azure-api.net/'

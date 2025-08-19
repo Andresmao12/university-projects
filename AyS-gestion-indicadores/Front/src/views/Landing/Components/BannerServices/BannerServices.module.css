@@ -1,0 +1,25 @@
+.container {
+    height: 100vh;
+    padding: 3em 1em;
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3em;
+}
+
+.container h2 {
+    font-size: 46px;
+
+}
+
+.gridCont {
+    height: 100%;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-auto-rows: 1fr;
+    gap: 3em;
+}
